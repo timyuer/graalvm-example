@@ -19,7 +19,11 @@ public class GraalPy {
 
     public static void main(String[] args) throws IOException {
 
-        args = new String[]{"1"};
+        if (args.length == 0) {
+            args = new String[]{"1"};
+        }
+
+
         System.out.println("Hello, World!");
 //        String venvExePath = GraalPy.class.
 //                getClassLoader().
@@ -43,7 +47,7 @@ public class GraalPy {
         System.out.println(i);
 
         //运行python文件
-        Value value = ctx.eval(Source.newBuilder(PYTHON, new File("src/main/python/test.py")).build());
+        Value value = ctx.eval(Source.newBuilder(PYTHON, new File("/opt/package/code/graalvm-example/src/main/python/test.py")).build());
         System.out.println(value);
 
         //执行python文件中的方法
