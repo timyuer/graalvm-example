@@ -34,7 +34,7 @@ mvn clean package
 ### 2. 制作镜像
 
 ```bash
-./native-image --language:python --python.StdLibHome:/usr/local/graalvm/bin -cp /opt/package/code/graalvm-example/target/graalvm-example-1.0-SNAPSHOT.jar example.GraalPy GraalPy
+./native-image --language:python -cp /opt/package/code/graalvm-example/target/graalvm-example-1.0-SNAPSHOT.jar example.GraalPy GraalPy
 ```
 
 ### 3. 执行镜像
