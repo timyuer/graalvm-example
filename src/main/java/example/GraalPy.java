@@ -2,8 +2,11 @@ package example;
 
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.Engine;
+import org.graalvm.polyglot.Source;
 import org.graalvm.polyglot.Value;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 
 public class GraalPy {
@@ -14,7 +17,9 @@ public class GraalPy {
     private static final String PYTHON_EXECUTABLE = "python.Executable";
     private static final String PYTHON_FORCE_IMPORT_SITE = "python.ForceImportSite";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
+        args = new String[]{"1"};
         System.out.println("Hello, World!");
 //        String venvExePath = GraalPy.class.
 //                getClassLoader().
@@ -24,14 +29,21 @@ public class GraalPy {
         System.out.println(Paths.get("venv", "bin", "graalpy").toString());
 
         Context ctx = Context.newBuilder("python").
+                allowAllAccess(true).
                 allowIO(true).
-//                option("python.ForceImportSite", "true").
+                allowExperimentalOptions(true).
+                option("python.ForceImportSite", "true").
+                arguments(PYTHON, args). //python参数
 //                option("python.PythonPath", "/opt/package/code/java-example/java-common/python").
-                option("python.Executable", "/opt/package/code/java-example/java-common/graalpy-22.3.1-linux-amd64/bin/graalpy").
+//                option("python.Executable", "/usr/local/graalpy-22.3.1-linux-amd64/bin/graalpy").
         build();
 
-        int i = ctx.eval(PYTHON, "a+b").asInt();
+        int i = ctx.eval(PYTHON, "1+2").asInt();
         System.out.println(i);
+
+//        Source.newBuilder(PYTHON, "","");
+        Value value = ctx.eval(Source.newBuilder(PYTHON, new File("src/main/python/test.py")).build());
+        System.out.println(value);
     }
 
 
