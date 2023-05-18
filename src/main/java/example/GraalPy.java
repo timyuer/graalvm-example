@@ -38,12 +38,20 @@ public class GraalPy {
 //                option("python.Executable", "/usr/local/graalpy-22.3.1-linux-amd64/bin/graalpy").
         build();
 
+        //直接执行python命令
         int i = ctx.eval(PYTHON, "1+2").asInt();
         System.out.println(i);
 
-//        Source.newBuilder(PYTHON, "","");
+        //运行python文件
         Value value = ctx.eval(Source.newBuilder(PYTHON, new File("src/main/python/test.py")).build());
         System.out.println(value);
+
+        //执行python文件中的方法
+        Value bindings = ctx.getBindings(PYTHON);
+        Value getDate = bindings.getMember("get_date");
+        Value execute = getDate.execute();
+
+        System.out.println(execute);
     }
 
 

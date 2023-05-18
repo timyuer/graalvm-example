@@ -4,4 +4,8 @@ print('aaa')
 
 # a = sys.argv[0]
 print('args: ' + str(sys.argv))
-print('args: ' )
+print('args: ')
+
+
+def get_date():
+    return "date"
