@@ -34,13 +34,13 @@ mvn clean package
 ### 2. 制作镜像
 
 ```bash
-./native-image --language:python -cp /opt/package/code/graalvm-example/target/graalvm-example-1.0-SNAPSHOT.jar example.GraalPy GraalPy
+/usr/local/graalvm/bin/native-image --language:ruby --language:js --language:python -cp /opt/package/code/graalvm-example/target/graalvm-example-1.0-SNAPSHOT.jar example.GraalDemo GraalDemo
 ```
 
 ### 3. 执行镜像
 
 ```bash
-./GraalPy
+./GraalDemo
 ```
 
 ## 参考
